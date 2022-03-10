@@ -6,10 +6,12 @@ const cors = require("cors");
 // App Level MW
 app.use(cors());
 app.use(express.json());
+require("dotenv").config();
 
 const { db } = require('./models/index');
 
-const myRouter = require("./routes/router")
+const myRouter = require("./routes/router");
+const req = require('express/lib/request');
 
 
 app.use(myRouter);
@@ -21,7 +23,7 @@ app.get("/", (req, res) => {
 
 
 
-const port = 5000;
+const port = process.env.PORT ;
 const server = app.listen(port, () => {
     if (!port) { throw new Error('Missing Port') }
     else { console.log(`🌎  ==> API Server now listening on PORT ${port}!`) };
